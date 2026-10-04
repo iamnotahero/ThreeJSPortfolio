@@ -13,13 +13,13 @@ import { a } from '@react-spring/three'
 
 import spaceScene from '../assets/3d/space_boi.glb'
 
-const Space = ({isRotating, setIsRotating, ...props}) =>{
+const Space = ({isRotating, setIsRotating, rotationSpeed, setCurrentStage, runShipAnimation,setRunShipAnimation, ...props}) =>{
   const spaceRef = useRef();
+  const introSpinElapsed = useRef(0)
   const {gl, viewport} = useThree();
   const { nodes, materials } = useGLTF(spaceScene);
 
   const lastX = useRef(0);
-  const rotationSpeed = useRef(0);
   const dampingFactor = 0.95;
   const rotationSensitivity = 0.05;
 
@@ -54,9 +54,13 @@ const Space = ({isRotating, setIsRotating, ...props}) =>{
   };
   const handleKeyDown = (e) => {
     if(e.key === 'ArrowLeft'){
+      if(!isRotating) setIsRotating(true);
         spaceRef.current.rotation.y += 0.01 * Math.PI;
+        rotationSpeed.current = 0.0125;
     }else if(e.key === 'ArrowRight'){
+      if(!isRotating) setIsRotating(true);
         spaceRef.current.rotation.y -= 0.01 * Math.PI;
+        rotationSpeed.current = -0.0125;
     } 
   }
 
@@ -66,7 +70,31 @@ const Space = ({isRotating, setIsRotating, ...props}) =>{
     }
   }
 
-  useFrame(() => {
+  useFrame((_, delta) => {
+  const introSpinDuration = 3.5
+  if (!isRotating && introSpinElapsed.current < introSpinDuration) {
+    const previousProgress = introSpinElapsed.current / introSpinDuration
+
+    introSpinElapsed.current = Math.min(
+      introSpinElapsed.current + delta,
+      introSpinDuration
+    )
+
+    const progress = introSpinElapsed.current / introSpinDuration
+    const easeOut = (value) => 1 - Math.pow(1 - value, 3)
+    const previousEase = easeOut(previousProgress)
+    const currentEase = easeOut(progress)
+    const oneFullTurn = Math.PI * 2
+
+    spaceRef.current.rotation.y -=
+      oneFullTurn * (currentEase - previousEase)
+
+    return
+  }else{
+    setRunShipAnimation(false);
+  }
+    // Intro spin is complete, or the user started dragging.
+    introSpinElapsed.current = introSpinDuration
     if(!isRotating){
         rotationSpeed.current *= dampingFactor;
         if(Math.abs(rotationSpeed.current) < 0.001){
@@ -74,31 +102,33 @@ const Space = ({isRotating, setIsRotating, ...props}) =>{
         }
         spaceRef.current.rotation.y += rotationSpeed.current;
     }else{
+
+    }
       const rotation = spaceRef.current.rotation.y;    
       const normalizedRotation =
               ((rotation % (2 * Math.PI)) + 2 * Math.PI) % (2 * Math.PI);
-
+            //console.log('Normalized Rotation:', normalizedRotation);
             // Set the current stage based on the island's orientation
             switch (true) {
-              case normalizedRotation >= 5.45 && normalizedRotation <= 5.85:
+              case normalizedRotation >= 1.4 && normalizedRotation <= 1.65:
                 setCurrentStage(4);
                 break;
-              case normalizedRotation >= 0.85 && normalizedRotation <= 1.3:
+              case normalizedRotation >= 1.7 && normalizedRotation <= 2:
                 setCurrentStage(3);
                 break;
-              case normalizedRotation >= 2.4 && normalizedRotation <= 2.6:
+              case normalizedRotation >= 3.6 && normalizedRotation <= 4:
                 setCurrentStage(2);
                 break;
-              case normalizedRotation >= 4.25 && normalizedRotation <= 4.75:
+              case normalizedRotation >= 4.5 && normalizedRotation <= 4.85:
                 setCurrentStage(1);
                 break;
               default:
                 setCurrentStage(null);
             }
-    }
   })
   useEffect(() => {
     const canvas = gl.domElement;
+      canvas.style.touchAction = 'none';
         canvas.addEventListener('pointerdown', handlePointerDown);
         canvas.addEventListener('pointerup', handlePointerUp);
         canvas.addEventListener('pointermove', handlePointerMove);
