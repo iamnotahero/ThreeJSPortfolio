@@ -1,10 +1,47 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { VerticalTimeline, VerticalTimelineElement }  from 'react-vertical-timeline-component';
 import 'react-vertical-timeline-component/style.min.css';
 
-import { experiences, skills } from '../constants/index.js'
+import { experiences, skills, achievements } from '../constants/index.js'
+import { hero, meta, youcode } from '../assets/images';
 import CTA from '../components/CTA.jsx';
+
+
+
 const About = () => {
+  const [selectedAchievementIndex, setSelectedAchievementIndex] = useState(null);
+  const [achievementPage, setAchievementPage] = useState(0);
+
+  const openAchievement = (index) => {
+    console.log('Opening achievement:', index);
+    setSelectedAchievementIndex(index);
+    setAchievementPage(0);
+  };
+
+  const closeAchievement = () => {
+    setSelectedAchievementIndex(null);
+    setAchievementPage(0);
+  };
+
+  const currentAchievement = selectedAchievementIndex !== null ? achievements[selectedAchievementIndex] : null;
+
+  const goToPage = (direction) => {
+    if (!currentAchievement) return;
+    setAchievementPage((currentPage) => {
+      const nextPage = currentPage + direction;
+      if (nextPage < 0) return 0;
+      if (nextPage >= currentAchievement.pages.length) return currentAchievement.pages.length - 1;
+      return nextPage;
+    });
+  };
+
+  const goToAchievement = (direction) => {
+    if (selectedAchievementIndex === null) return;
+    const nextIndex = (selectedAchievementIndex + direction + achievements.length) % achievements.length;
+    setSelectedAchievementIndex(nextIndex);
+    setAchievementPage(0);
+  };
+
   return (
     <section className='max-container'>
       <h1 className='head-text'>
@@ -18,6 +55,147 @@ const About = () => {
         where I was able to create a game called <span className='text-[#915eff]'>"Lady Makiling Defense"</span> with my team. I am currently looking for a job as a 
         <span className='text-[#915eff]'> Game Developer</span> or <span className='text-[#915eff]'> Full Stack Developer</span> where I can utilize my skills and knowledge to contribute to the growth of the company.</p>
       </div>
+      <div className='py-10 flex flex-col'>
+        <h3 className='subhead-text'>My Achievements</h3>
+        <div className='mt-12 grid grid-cols-1 gap-8 md:grid-cols-2 xl:grid-cols-3'>
+          {achievements.map((achievement) => (
+            <button
+              key={achievement.title}
+              type='button'
+              onClick={() => openAchievement(achievements.indexOf(achievement))}
+              className='group overflow-hidden rounded-2xl border border-white/10 bg-white/5 text-left shadow-[0_0_30px_rgba(145,94,255,0.08)] transition duration-300 hover:-translate-y-1 hover:border-[#915eff]/40'
+            >
+              <div className='overflow-hidden'>
+                <img
+                  src={achievement.image}
+                  alt={achievement.title}
+                  className='h-56 w-full object-fill transition duration-500 group-hover:scale-105'
+                />
+              </div>
+              <div className='p-5'>
+                <h4 className='text-xl font-semibold text-white'>{achievement.title}</h4>
+                <p className='mt-3 text-sm leading-6 text-slate-300/80'>{achievement.description}</p>
+              </div>
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {currentAchievement && (
+        <div className='fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4 backdrop-blur-sm'>
+          <div className='relative w-full max-w-5xl overflow-hidden rounded-[28px] border border-[#915eff]/40 bg-[#120f1d] shadow-[0_0_60px_rgba(145,94,255,0.35)]'>
+            <div className='flex items-center justify-between border-b border-white/10 px-5 py-4'>
+              <div>
+                <p className='text-xs font-medium uppercase tracking-[0.35em] text-[#915eff]'>
+                  Achievement {selectedAchievementIndex + 1} / {achievements.length}
+                </p>
+                <p className='mt-2 text-sm text-slate-300/70'>Page {achievementPage + 1} / {currentAchievement.pages.length}</p>
+              </div>
+
+              <button
+                type='button'
+                onClick={closeAchievement}
+                className='rounded-full border border-white/10 bg-white/5 px-3 py-1 text-sm text-white transition hover:bg-white/10'
+              >
+                Close
+              </button>
+            </div>
+
+            <div className='grid md:grid-cols-2'>
+              <img
+                src={currentAchievement.pages[achievementPage].image || currentAchievement.image}
+                alt={currentAchievement.title}
+                className='h-64 w-full object-cover md:h-full'
+              />
+
+              <div className='flex flex-col justify-center p-6 md:p-8'>
+                <p className='text-xs font-medium uppercase tracking-[0.3em] text-[#915eff]'>Featured Story</p>
+                <h4 className='mt-3 text-2xl font-semibold text-white md:text-3xl'>
+                  {currentAchievement.title}
+                </h4>
+                <h5 className='mt-5 text-xl font-semibold text-white'>
+                  {currentAchievement.pages[achievementPage].heading}
+                </h5>
+                <p className='mt-4 text-base leading-8 text-slate-300/80'>
+                  {currentAchievement.pages[achievementPage].text}
+                </p>
+                  {(currentAchievement.websiteLink || currentAchievement.gameLink) && (
+                    <div className='mt-6 flex flex-wrap gap-3'>
+                      {currentAchievement.websiteLink && (
+                        <a
+                          href={currentAchievement.websiteLink}
+                          target='_blank'
+                          rel='noreferrer'
+                          className='rounded-full bg-[#915eff] px-4 py-2 text-sm font-medium text-white transition hover:bg-[#7d4ae8]'
+                        >
+                          Visit Website
+                        </a>
+                      )}
+
+                      {currentAchievement.gameLink && (
+                        <a
+                          href={currentAchievement.gameLink}
+                          target='_blank'
+                          rel='noreferrer'
+                          className='rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-white transition hover:bg-white/10'
+                        >
+                          Play Game
+                        </a>
+                      )}
+                    </div>
+                  )}
+                <div className='mt-8 flex flex-wrap gap-3'>
+                  <button
+                    type='button'
+                    onClick={() => goToPage(-1)}
+                    className='rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-white transition hover:bg-white/10'
+                  >
+                    Previous
+                  </button>
+                  <button
+                    type='button'
+                    onClick={() => goToPage(1)}
+                    className='rounded-full bg-[#915eff] px-4 py-2 text-sm font-medium text-white transition hover:bg-[#7d4ae8]'
+                  >
+                    Next
+                  </button>
+                </div>
+
+                <div className='mt-6 flex gap-2'>
+                  {currentAchievement.pages.map((_, index) => (
+                    <button
+                      key={index}
+                      type='button'
+                      onClick={() => setAchievementPage(index)}
+                      className={`h-2.5 w-8 rounded-full transition ${
+                        achievementPage === index ? 'bg-[#915eff]' : 'bg-white/20'
+                      }`}
+                    />
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            <div className='flex items-center justify-between border-t border-white/10 px-5 py-4'>
+              <button
+                type='button'
+                onClick={() => goToAchievement(-1)}
+                className='text-sm text-slate-300 transition hover:text-white'
+              >
+                Previous Achievement
+              </button>
+              <button
+                type='button'
+                onClick={() => goToAchievement(1)}
+                className='text-sm text-slate-300 transition hover:text-white'
+              >
+                Next Achievement
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       <div className='py-10 flex flex-col'>
         <h3 className='subhead-text'>My Skills</h3>
         <div className='mt-16 flex flex-wrap gap-15'>

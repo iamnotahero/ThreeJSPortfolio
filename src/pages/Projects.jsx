@@ -8,11 +8,10 @@ const Projects = () => {
 
       </h1>
 
-      <div>
-        <p>A passionate <span className='text-[#915eff]'>Full Stack Developer</span> based in <span className='text-[#915eff]'>Philippines. </span>
-        My recent achievement was winning Top 7 in a Global Game Development Competition called <a href='https://qsimpact.org/skillschallenge'><span className='text-[#915eff]' >QSImpACT Skills Challenge 2025 </span></a>
-        where I was able to create a game called <span className='text-[#915eff]'>"Lady Makiling Defense"</span> with my team. I am currently looking for a job as a 
-        <span className='text-[#915eff]'> Game Developer</span> or <span className='text-[#915eff]'> Full Stack Developer</span> where I can utilize my skills and knowledge to contribute to the growth of the company.</p>
+      <div className='mt-8'>
+        <p className='text-slate-300/80'>
+          I’ve worked on a variety of projects that combine <span className='text-[#915eff]'>software development</span>, <span className='text-[#915eff]'>web technologies</span>, <span className='text-[#915eff]'>artificial intelligence</span>, and <span className='text-[#915eff]'>game development</span>. These projects range from <span className='text-[#915eff]'>full-stack web applications</span> and <span className='text-[#915eff]'>database-driven systems</span> to <span className='text-[#915eff]'>interactive games</span> and <span className='text-[#915eff]'>machine learning applications</span>. Through each project, I’ve gained hands-on experience designing solutions, developing features, working with <span className='text-[#915eff]'>APIs</span> and <span className='text-[#915eff]'>databases</span>, and solving technical challenges. My goal with every project is not only to build something functional, but also to continuously improve my <span className='text-[#915eff]'>programming skills</span> and explore new technologies.
+        </p>
       </div>
     </section>
   )

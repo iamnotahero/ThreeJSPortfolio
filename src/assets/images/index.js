@@ -5,6 +5,9 @@ import starbucks from './starbucks.png'
 import tesla from './tesla.png'
 import logo from './logo.svg'
 import youcode from './youcode.png'
+import youcodegroup from './youcodegroup.jpg'
+import qsimpactgroup from './qsimpactgroup.jpg'
+import qsimpactcertificate from './qsimpactcertificate.png'
 
 export {
     hero,
@@ -13,5 +16,8 @@ export {
     starbucks,
     tesla,
     logo,
-    youcode
+    youcode,
+    youcodegroup,
+    qsimpactgroup,
+    qsimpactcertificate,
 }
