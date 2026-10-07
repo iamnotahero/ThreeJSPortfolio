@@ -146,7 +146,7 @@ export const achievements = [
     description: 'Placed Top 7 in a global game development competition and helped build the game Lady Makiling Defense with my team.',
     image: qsimpactgroup,
     websiteLink: 'https://qsimpact.org/skillschallenge',
-    gameLink: 'https://your-game-link.com',
+    gameLink: 'https://play.unity.com/en/games/a328df14-c6fb-49e1-bd59-a261a8d59a1e/lady-makiling-defense-demo',
     pages: [
         {
         image: qsimpactcertificate,
@@ -179,25 +179,6 @@ export const achievements = [
       {
         heading: 'Why It Matters',
         text: 'Full-stack work lets me understand both the product and the system behind it. That perspective helps me build more cohesive solutions and communicate better across technical and design tasks.',
-      },
-    ],
-  },
-  {
-    title: 'AI & Emerging Technologies',
-    description: 'Explored machine learning and intelligent systems through projects focused on solving real-world problems with technology.',
-    image: meta,
-    pages: [
-      {
-        heading: 'Curiosity and Learning',
-        text: 'Exploring AI has shown me how powerful technology can be when paired with thoughtful problem solving. I am excited by the potential of intelligent systems to improve workflows, support decision-making, and create smarter experiences.',
-      },
-      {
-        heading: 'Application Areas',
-        text: 'I am interested in how AI can support automation, prediction, recommendation, and optimization in real-world applications. This includes both practical product use and creative experimentation.',
-      },
-      {
-        heading: 'Future Direction',
-        text: 'I want to keep growing in this area by building meaningful projects that combine technical depth with real user value. My goal is to keep learning while turning ideas into useful tools and experiences.',
       },
     ],
   },

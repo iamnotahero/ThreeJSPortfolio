@@ -69,7 +69,7 @@ const About = () => {
                 <img
                   src={achievement.image}
                   alt={achievement.title}
-                  className='h-56 w-full object-fill transition duration-500 group-hover:scale-105'
+                  className='h-56 w-full object-cover transition duration-500 group-hover:scale-105'
                 />
               </div>
               <div className='p-5'>
@@ -82,9 +82,9 @@ const About = () => {
       </div>
 
       {currentAchievement && (
-        <div className='fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4 backdrop-blur-sm'>
-          <div className='relative w-full max-w-5xl overflow-hidden rounded-[28px] border border-[#915eff]/40 bg-[#120f1d] shadow-[0_0_60px_rgba(145,94,255,0.35)]'>
-            <div className='flex items-center justify-between border-b border-white/10 px-5 py-4'>
+        <div className='fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-3 backdrop-blur-sm'>
+          <div className='relative flex max-h-[92dvh] w-full max-w-5xl flex-col overflow-hidden rounded-2xl border border-[#9cc8ff]/35 bg-[#0b1630] shadow-[0_0_60px_rgba(93,127,255,0.25)] sm:rounded-[28px]'>
+            <div className='flex shrink-0 items-center justify-between gap-3 border-t border-white/10 px-4 py-4 sm:px-5'>
               <div>
                 <p className='text-xs font-medium uppercase tracking-[0.35em] text-[#915eff]'>
                   Achievement {selectedAchievementIndex + 1} / {achievements.length}
@@ -101,14 +101,16 @@ const About = () => {
               </button>
             </div>
 
-            <div className='grid md:grid-cols-2'>
+            <div className='grid min-h-0 flex-1 grid-cols-1 overflow-y-auto md:grid-cols-2'>
               <img
                 src={currentAchievement.pages[achievementPage].image || currentAchievement.image}
                 alt={currentAchievement.title}
-                className='h-64 w-full object-cover md:h-full'
+                className={`h-48 w-full bg-[#050d1a00] sm:h-56 md:h-full md:min-h-[30rem] ${
+                  currentAchievement.pages[achievementPage].image ? 'object-contain' : 'object-cover'
+                }`}
               />
 
-              <div className='flex flex-col justify-center p-6 md:p-8'>
+              <div className='flex flex-col justify-center p-5 sm:p-8'>
                 <p className='text-xs font-medium uppercase tracking-[0.3em] text-[#915eff]'>Featured Story</p>
                 <h4 className='mt-3 text-2xl font-semibold text-white md:text-3xl'>
                   {currentAchievement.title}
