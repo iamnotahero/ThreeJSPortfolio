@@ -26,6 +26,9 @@ import {
     typescript,
     csharp,
     unity,
+    discord,
+    pingpong,
+    staff
 } from "../assets/icons";
 
 export const skills = [
@@ -131,12 +134,12 @@ export const socialLinks = [
     {
         name: 'GitHub',
         iconUrl: github,
-        link: 'https://github.com/YourGitHubUsername',
+        link: 'https://github.com/iamnotahero',
     },
     {
         name: 'LinkedIn',
         iconUrl: linkedin,
-        link: 'https://www.linkedin.com/in/YourLinkedInUsername',
+        link: 'https://www.linkedin.com/in/hendrix-leonard-maligaya-a6489622b/',
     }
 ];
 
@@ -186,45 +189,25 @@ export const achievements = [
 
 export const projects = [
     {
-        iconUrl: pricewise,
-        theme: 'btn-back-red',
-        name: 'Amazon Price Tracker',
-        description: 'Developed a web application that tracks and notifies users of price changes for products on Amazon, helping users find the best deals.',
-        link: 'https://github.com/adrianhajdin/pricewise',
-    },
-    {
-        iconUrl: threads,
-        theme: 'btn-back-green',
-        name: 'Full Stack Threads Clone',
-        description: 'Created a full-stack replica of the popular discussion platform "Threads," enabling users to post and engage in threaded conversations.',
-        link: 'https://github.com/adrianhajdin/threads',
-    },
-    {
-        iconUrl: car,
+        iconUrl: discord,
         theme: 'btn-back-blue',
-        name: 'Car Finding App',
-        description: 'Designed and built a mobile app for finding and comparing cars on the market, streamlining the car-buying process.',
-        link: 'https://github.com/adrianhajdin/project_next13_car_showcase',
+        name: 'MeChat App',
+        description: 'A Discord Clone, you can create an account and sign in to communicate with others',
+        link: 'https://me-chat-app-front-end.vercel.app/',
     },
     {
-        iconUrl: snapgram,
-        theme: 'btn-back-pink',
-        name: 'Full Stack Instagram Clone',
-        description: 'Built a complete clone of Instagram, allowing users to share photos and connect with friends in a familiar social media environment.',
-        link: 'https://github.com/adrianhajdin/social_media_app',
+        iconUrl: staff,
+        theme: 'btn-back-green',
+        name: 'Lady Makiling Defense',
+        description: 'A game i made in Unity, a procedurally generated map',
+        link: 'https://play.unity.com/en/games/a328df14-c6fb-49e1-bd59-a261a8d59a1e/lady-makiling-defense-demo',
     },
     {
-        iconUrl: estate,
+        iconUrl: pingpong,
         theme: 'btn-back-black',
-        name: 'Real-Estate Application',
-        description: 'Developed a web application for real estate listings, facilitating property searches and connecting buyers with sellers.',
-        link: 'https://github.com/adrianhajdin/projects_realestate',
+        name: 'Ping-Pong Game',
+        description: 'A game i made in Love2D, can be played in mobile devices',
+        link: 'https://hendrix-cs50pong.vercel.app/',
     },
-    {
-        iconUrl: summiz,
-        theme: 'btn-back-yellow',
-        name: 'AI Summarizer Application',
-        description: 'App that leverages AI to automatically generate concise & informative summaries from lengthy text content, or blogs.',
-        link: 'https://github.com/adrianhajdin/project_ai_summarizer',
-    }
+
 ];

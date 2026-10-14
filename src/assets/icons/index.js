@@ -28,6 +28,9 @@ import soundon from './soundon.png'
 import soundoff from './soundoff.png'
 import csharp from './csharp.svg'
 import unity from './unity.svg'
+import discord from './discord.svg'
+import pingpong from './pingpong.svg'
+import staff from './staff.png'
 
 export {
     css,
@@ -59,5 +62,8 @@ export {
     soundon,
     soundoff,
     csharp,
-    unity
+    unity,
+    discord,
+    pingpong,
+    staff
 }
