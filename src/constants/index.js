@@ -167,7 +167,7 @@ export const achievements = [
     ],
   },
   {
-    title: 'Full Stack Development',
+    title: 'System Developer Internship',
     description: 'Built and improved end-to-end web applications with modern frontend, backend, and database-driven features.',
     image: youcodegroup,
     pages: [
@@ -181,7 +181,7 @@ export const achievements = [
       },
       {
         heading: 'Why It Matters',
-        text: 'Full-stack work lets me understand both the product and the system behind it. That perspective helps me build more cohesive solutions and communicate better across technical and design tasks.',
+        text: 'System Development work lets me understand both the product and the system behind it. That perspective helps me build more cohesive solutions and communicate better across technical and design tasks.',
       },
     ],
   },
